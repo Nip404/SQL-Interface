@@ -1,9 +1,10 @@
 use strict;
 use warnings;
 
-BEGIN {push (@INC,'C:/Users/NIP/Desktop');}
+my $path = 'Insert path of package SQL_API.pm';
+BEGIN {push (@INC,$path);}
 
-use SQLManager;
+use SQL_API;
 use feature "say";
 
 my $user = "root";
