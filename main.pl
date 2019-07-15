@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use 5.30.0
+use 5.30.0;
 
 use lib::SQL_API;
 use feature "say";
