@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use testlibs::SQL_API;
+use lib::SQL_API;
 use feature "say";
 
 my $user = "root";
