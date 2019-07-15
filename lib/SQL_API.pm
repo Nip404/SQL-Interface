@@ -20,7 +20,7 @@ sub new {
     return $self;
 }
 
-sub _make_hash {
+my $make_hash = sub {
     my $arr1_ref = shift;
     my $arr2_ref = shift;
 
@@ -43,7 +43,7 @@ sub read_db {
 
     my @data = ();
     while (my @row = $sth->fetchrow_array()) {
-        my %hash = _make_hash(\@fields, \@row);
+        my %hash = $make_hash->(\@fields, \@row);
         push @data, (!@fields) ? \@row : \%hash;
     };
 
