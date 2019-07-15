@@ -2,8 +2,6 @@ package SQL_API;
 
 use DBI;
 
-use feature "say";
-
 sub new {
     my $class = shift;
     my $self = {
@@ -16,17 +14,17 @@ sub new {
 
     bless $self, $class;
 
+    our $driver = "mysql";
+    my $dsn = "DBI:$driver:database=$self->{dbname}:$self->{host}";
+    our $dbh = DBI->connect($dsn, $self->{username}, $self->{password}) or die $DBI::errstr;
+
     return $self;
 }
 
 sub read_db {
     my ($self, $statement) = @_;
-    my $driver = "mysql";
 
-    my $dsn = "DBI:$driver:database=$self->{dbname}:$self->{host}";
-    my $dbh = DBI->connect($dsn, $self->{username}, $self->{password}) or die $DBI::errstr;
     my $sth = $dbh->prepare($statement);
-
     $sth->execute();
 
     my @data = ();
@@ -38,6 +36,10 @@ sub read_db {
     $self->{count}++;
 
     return @data;
+}
+
+sub terminate {
+    $dbh->disconnect;
 }
 
 1;
